@@ -1,0 +1,5 @@
+designate-dashboard (2.0.0~b2-1) experimental; urgency=medium
+
+  * Initial release. (Closes: #812600)
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 25 Jan 2016 21:39:26 +0800

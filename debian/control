@@ -1,0 +1,54 @@
+Source: designate-dashboard
+Section: python
+Priority: extra
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Uploaders: Thomas Goirand <zigo@debian.org>,
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               openstack-pkg-tools,
+               python-all,
+               python-pbr (>= 1.8),
+               python-setuptools,
+               python-sphinx,
+Build-Depends-Indep: openstack-dashboard (>= 9.0.0~b2),
+                     python-babel,
+                     python-coverage,
+                     python-designateclient (>= 1.5.0),
+                     python-django (>= 1.8),
+                     python-django-compressor (>= 1.4),
+                     python-django-nose,
+                     python-django-openstack-auth (>= 2.0.0),
+                     python-mock (>= 1.3),
+                     python-mox,
+                     python-mox3 (>= 0.7.0),
+                     python-nose,
+                     python-nosehtmloutput,
+                     python-nosexcover,
+                     python-openstack.nose-plugin,
+                     python-oslo.config (>= 3.2.0),
+                     python-oslosphinx (>= 2.5.0),
+                     python-pbr (>= 1.8),
+                     python-testtools (>= 1.4.0),
+                     python-unittest2,
+                     testrepository,
+Standards-Version: 3.9.6
+Homepage: https://github.com/stackforge/designate-dashboard
+Vcs-Git: git://anonscm.debian.org/openstack/designate-dashboard.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/designate-dashboard.git;a=summary
+
+Package: python-designate-dashboard
+Architecture: all
+Depends: openstack-dashboard (>= 9.0.0~b2),
+         python-babel,
+         python-designateclient (>= 1.5.0),
+         python-pbr (>= 1.8),
+         ${misc:Depends},
+         ${python:Depends},
+Description: OpenStack DNS as a Service - dashboard plugin
+ Designate provides DNSaaS services for OpenStack. It provides a multi-tenant
+ REST API for domain & record management. It is Integrated with Keystone for
+ authentication, and provides a framework in place to integrate with Nova and
+ Neutron notifications (for auto-generated records). Designate supports
+ PowerDNS and Bind9 out of the box.
+ .
+ This package contains the OpenStack dashboard plugin.
