@@ -32,7 +32,7 @@ override_dh_auto_install:
 	# designatedashboard/enabled/_7*
 	set -e ; for pyvers in $(PYTHONS); do \
 		mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
-		cp $(CURDIR)/designatedashboard/enabled/_7* $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
+		cp $(CURDIR)/designatedashboard/enabled/_17* $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
 	done
 	mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
-	cp $(CURDIR)/designatedashboard/enabled/_7*.py $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
+	cp $(CURDIR)/designatedashboard/enabled/_17*.py $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
