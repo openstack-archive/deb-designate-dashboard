@@ -11,14 +11,15 @@ export OSLO_PACKAGE_VERSION=$(shell dpkg-parsechangelog | grep Version: | cut -d
 
 override_dh_auto_test:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	NOSE_WITH_OPENSTACK=1 \
+	PYTHONPATH=$(CURDIR) \
+		NOSE_WITH_OPENSTACK=1 \
 		NOSE_OPENSTACK_COLOR=1 \
 		NOSE_OPENSTACK_RED=0.05 \
 		NOSE_OPENSTACK_YELLOW=0.025 \
 		NOSE_OPENSTACK_SHOW_ELAPSED=1 \
-		DJANGO_SETTINGS_MODULE=designatedashboard.tests.settings \
-		python-coverage run \
-		$(CURDIR)/manage.py test designatedashboard --settings=designatedashboard.tests.settings
+		PYTHONDONTWRITEBYTECODE=1 \
+		DJANGO_SETTINGS_MODULE=designatedashboard.settings \
+		python $(CURDIR)/manage.py test designatedashboard --settings=designatedashboard.tests.settings
 endif
 
 override_dh_clean:
