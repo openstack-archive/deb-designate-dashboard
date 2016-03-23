@@ -1,0 +1,282 @@
+Subject: Fix unit tests under Django 1.9
+ Importing openstack_dashboard from within tests/__init__.py causes
+ problems under Django 1.9 because some changes to module loading mean
+ that Django gets upset that it hasn't finished loading its application.
+ .
+ Moving the import and BaseRecordFormCleanTests to tests/base.py resolves
+ the issue.
+ .
+ In addition, tests/settings.py is modified to use logging.NullHandler
+ rather than django.utils.log.NullHandler which was removed in Django 1.9
+Author: Steve McLellan <steven.j.mclellan@gmail.com>
+Date: Wed, 23 Mar 2016 20:31:59 +0000 (-0500)
+X-Git-Url: https://review.openstack.org/gitweb?p=openstack%2Fdesignate-dashboard.git;a=commitdiff_plain;h=0d623d74a7d607c258687df7ae7152679cbff0a5
+Change-Id: I485eb77f13a9173cf9bec9dd7ec024be9b4de3e8
+Origin: upstream, https://review.openstack.org/#/c/296776/
+Last-Update: 2016-03-23
+
+diff --git a/designatedashboard/tests/__init__.py b/designatedashboard/tests/__init__.py
+index f111556..e69de29 100644
+--- a/designatedashboard/tests/__init__.py
++++ b/designatedashboard/tests/__init__.py
+@@ -1,67 +0,0 @@
+-# vim: tabstop=4 shiftwidth=4 softtabstop=4
+-
+-# Copyright 2012 United States Government as represented by the
+-# Administrator of the National Aeronautics and Space Administration.
+-# All Rights Reserved.
+-#
+-# Copyright 2012 Nebula, Inc.
+-#
+-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+-#    not use this file except in compliance with the License. You may obtain
+-#    a copy of the License at
+-#
+-#         http://www.apache.org/licenses/LICENSE-2.0
+-#
+-#    Unless required by applicable law or agreed to in writing, software
+-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+-#    License for the specific language governing permissions and limitations
+-#    under the License.
+-
+-# from designatedashboard import api
+-
+-from openstack_dashboard.test import helpers as test
+-
+-from designatedashboard.dashboards.project.dns_domains import forms
+-
+-
+-class BaseRecordFormCleanTests(test.TestCase):
+-
+-    DOMAIN_NAME = 'foo.com.'
+-    HOSTNAME = 'www'
+-
+-    MSG_FIELD_REQUIRED = 'This field is required'
+-    MSG_INVALID_HOSTNAME = 'Enter a valid hostname. The '\
+-                           'hostname should contain letters '\
+-                           'and numbers, and be no more than '\
+-                           '63 characters.'
+-    MSG_INVALID_HOSTNAME_SHORT = 'Enter a valid hostname'
+-
+-    def setUp(self):
+-        super(BaseRecordFormCleanTests, self).setUp()
+-
+-        # Request object with messages support
+-        self.request = self.factory.get('', {})
+-
+-        # Set-up form instance
+-        kwargs = {}
+-        kwargs['initial'] = {'domain_name': self.DOMAIN_NAME}
+-        self.form = forms.RecordCreate(self.request, **kwargs)
+-        self.form._errors = {}
+-        self.form.cleaned_data = {
+-            'domain_name': self.DOMAIN_NAME,
+-            'name': '',
+-            'data': '',
+-            'txt': '',
+-            'priority': None,
+-            'ttl': None,
+-        }
+-
+-    def assert_no_errors(self):
+-        self.assertEqual(self.form._errors, {})
+-
+-    def assert_error(self, field, msg):
+-        self.assertIn(msg, self.form._errors[field])
+-
+-    def assert_required_error(self, field):
+-        self.assert_error(field, self.MSG_FIELD_REQUIRED)
+diff --git a/designatedashboard/tests/base.py b/designatedashboard/tests/base.py
+index 6e93268..9062a3a 100644
+--- a/designatedashboard/tests/base.py
++++ b/designatedashboard/tests/base.py
+@@ -20,6 +20,11 @@ import os
+ import fixtures
+ import testtools
+ 
++from openstack_dashboard.test import helpers as test
++
++from designatedashboard.dashboards.project.dns_domains import forms
++
++
+ _TRUE_VALUES = ('True', 'true', '1', 'yes')
+ 
+ 
+@@ -51,3 +56,45 @@ class TestCase(testtools.TestCase):
+             self.useFixture(fixtures.MonkeyPatch('sys.stderr', stderr))
+ 
+         self.log_fixture = self.useFixture(fixtures.FakeLogger())
++
++
++class BaseRecordFormCleanTests(test.TestCase):
++
++    DOMAIN_NAME = 'foo.com.'
++    HOSTNAME = 'www'
++
++    MSG_FIELD_REQUIRED = 'This field is required'
++    MSG_INVALID_HOSTNAME = 'Enter a valid hostname. The '\
++                           'hostname should contain letters '\
++                           'and numbers, and be no more than '\
++                           '63 characters.'
++    MSG_INVALID_HOSTNAME_SHORT = 'Enter a valid hostname'
++
++    def setUp(self):
++        super(BaseRecordFormCleanTests, self).setUp()
++
++        # Request object with messages support
++        self.request = self.factory.get('', {})
++
++        # Set-up form instance
++        kwargs = {}
++        kwargs['initial'] = {'domain_name': self.DOMAIN_NAME}
++        self.form = forms.RecordCreate(self.request, **kwargs)
++        self.form._errors = {}
++        self.form.cleaned_data = {
++            'domain_name': self.DOMAIN_NAME,
++            'name': '',
++            'data': '',
++            'txt': '',
++            'priority': None,
++            'ttl': None,
++        }
++
++    def assert_no_errors(self):
++        self.assertEqual(self.form._errors, {})
++
++    def assert_error(self, field, msg):
++        self.assertIn(msg, self.form._errors[field])
++
++    def assert_required_error(self, field):
++        self.assert_error(field, self.MSG_FIELD_REQUIRED)
+diff --git a/designatedashboard/tests/settings.py b/designatedashboard/tests/settings.py
+index 27296b3..afc2b87 100644
+--- a/designatedashboard/tests/settings.py
++++ b/designatedashboard/tests/settings.py
+@@ -51,7 +51,7 @@ LOGGING = {
+     'handlers': {
+         'null': {
+             'level': 'DEBUG',
+-            'class': 'django.utils.log.NullHandler',
++            'class': 'logging.NullHandler'
+         },
+     },
+     'loggers': {
+diff --git a/designatedashboard/tests/test_designatedashboard.py b/designatedashboard/tests/test_designatedashboard.py
+index 86bcfd8..234a815 100644
+--- a/designatedashboard/tests/test_designatedashboard.py
++++ b/designatedashboard/tests/test_designatedashboard.py
+@@ -24,7 +24,7 @@ from django.core.urlresolvers import reverse  # noqa
+ 
+ from mox import IsA  # noqa
+ 
+-from designatedashboard import tests
++from designatedashboard.tests import base
+ 
+ DOMAIN_ID = '123'
+ # INDEX_URL = reverse('horizon:project:dns_domains:index')
+@@ -78,7 +78,7 @@ DOMAIN_ID = '123'
+ #         self.assertEqual(len(res.context['table'].data), len(records))
+ 
+ 
+-class ARecordFormTests(tests.BaseRecordFormCleanTests):
++class ARecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     IPV4 = '1.1.1.1'
+ 
+@@ -140,7 +140,7 @@ class ARecordFormTests(tests.BaseRecordFormCleanTests):
+         self.assert_error('data', self.MSG_INVALID_IPV4)
+ 
+ 
+-class AAAARecordFormTests(tests.BaseRecordFormCleanTests):
++class AAAARecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     IPV6 = '1111:1111:1111:11::1'
+ 
+@@ -202,7 +202,7 @@ class AAAARecordFormTests(tests.BaseRecordFormCleanTests):
+         self.assert_error('data', self.MSG_INVALID_IPV6)
+ 
+ 
+-class CNAMERecordFormTests(tests.BaseRecordFormCleanTests):
++class CNAMERecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     CNAME = 'bar.foo.com.'
+ 
+@@ -262,7 +262,7 @@ class CNAMERecordFormTests(tests.BaseRecordFormCleanTests):
+         self.assert_error('data', self.MSG_INVALID_HOSTNAME_SHORT)
+ 
+ 
+-class MXRecordFormTests(tests.BaseRecordFormCleanTests):
++class MXRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     MAIL_SERVER = 'mail.foo.com.'
+     PRIORITY = 10
+@@ -297,7 +297,7 @@ class MXRecordFormTests(tests.BaseRecordFormCleanTests):
+         self.assertEqual(self.DOMAIN_NAME, self.form.cleaned_data['name'])
+ 
+ 
+-class TXTRecordFormTests(tests.BaseRecordFormCleanTests):
++class TXTRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     TEXT = 'Lorem ipsum'
+ 
+@@ -356,7 +356,7 @@ class TXTRecordFormTests(tests.BaseRecordFormCleanTests):
+         self.assertEqual(self.TEXT, self.form.cleaned_data['data'])
+ 
+ 
+-class SRVRecordFormTests(tests.BaseRecordFormCleanTests):
++class SRVRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     SRV_NAME = '_foo._tcp.'
+     SRV_DATA = '1 1 srv.foo.com.'
+diff --git a/designatedashboard/tests/test_ptr_record_form.py b/designatedashboard/tests/test_ptr_record_form.py
+index 9bbb162..969fe44 100644
+--- a/designatedashboard/tests/test_ptr_record_form.py
++++ b/designatedashboard/tests/test_ptr_record_form.py
+@@ -12,10 +12,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from designatedashboard import tests
++from designatedashboard.tests import base
+ 
+ 
+-class PTRRecordFormTests(tests.BaseRecordFormCleanTests):
++class PTRRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     PTR = "6.0.0.10.in-addr.arpa."
+ 
+diff --git a/designatedashboard/tests/test_spf_record_form.py b/designatedashboard/tests/test_spf_record_form.py
+index ceb293f..7885c3f 100644
+--- a/designatedashboard/tests/test_spf_record_form.py
++++ b/designatedashboard/tests/test_spf_record_form.py
+@@ -12,10 +12,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from designatedashboard import tests
++from designatedashboard.tests import base
+ 
+ 
+-class SPFRecordFormTests(tests.BaseRecordFormCleanTests):
++class SPFRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     TEXT = 'v=spf1 +all'
+ 
+diff --git a/designatedashboard/tests/test_sshfp_record_form.py b/designatedashboard/tests/test_sshfp_record_form.py
+index 53169fb..32d7799 100644
+--- a/designatedashboard/tests/test_sshfp_record_form.py
++++ b/designatedashboard/tests/test_sshfp_record_form.py
+@@ -12,10 +12,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from designatedashboard import tests
++from designatedashboard.tests import base
+ 
+ 
+-class SSHFPRecordFormTests(tests.BaseRecordFormCleanTests):
++class SSHFPRecordFormTests(base.BaseRecordFormCleanTests):
+ 
+     TEXT = '2 1 d1eb0d876ec69d18bcefc4263ae43ec33ae14f4c'
+     MSG_INVALID_RECORD = "Enter a valid SSHFP record"
