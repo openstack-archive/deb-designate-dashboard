@@ -15,10 +15,10 @@ Change-Id: I485eb77f13a9173cf9bec9dd7ec024be9b4de3e8
 Origin: upstream, https://review.openstack.org/#/c/296776/
 Last-Update: 2016-03-23
 
-diff --git a/designatedashboard/tests/__init__.py b/designatedashboard/tests/__init__.py
-index f111556..e69de29 100644
---- a/designatedashboard/tests/__init__.py
-+++ b/designatedashboard/tests/__init__.py
+Index: designate-dashboard/designatedashboard/tests/__init__.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/__init__.py
++++ designate-dashboard/designatedashboard/tests/__init__.py
 @@ -1,67 +0,0 @@
 -# vim: tabstop=4 shiftwidth=4 softtabstop=4
 -
@@ -87,10 +87,10 @@ index f111556..e69de29 100644
 -
 -    def assert_required_error(self, field):
 -        self.assert_error(field, self.MSG_FIELD_REQUIRED)
-diff --git a/designatedashboard/tests/base.py b/designatedashboard/tests/base.py
-index 6e93268..9062a3a 100644
---- a/designatedashboard/tests/base.py
-+++ b/designatedashboard/tests/base.py
+Index: designate-dashboard/designatedashboard/tests/base.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/base.py
++++ designate-dashboard/designatedashboard/tests/base.py
 @@ -20,6 +20,11 @@ import os
  import fixtures
  import testtools
@@ -149,10 +149,10 @@ index 6e93268..9062a3a 100644
 +
 +    def assert_required_error(self, field):
 +        self.assert_error(field, self.MSG_FIELD_REQUIRED)
-diff --git a/designatedashboard/tests/settings.py b/designatedashboard/tests/settings.py
-index 27296b3..afc2b87 100644
---- a/designatedashboard/tests/settings.py
-+++ b/designatedashboard/tests/settings.py
+Index: designate-dashboard/designatedashboard/tests/settings.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/settings.py
++++ designate-dashboard/designatedashboard/tests/settings.py
 @@ -51,7 +51,7 @@ LOGGING = {
      'handlers': {
          'null': {
@@ -162,20 +162,22 @@ index 27296b3..afc2b87 100644
          },
      },
      'loggers': {
-diff --git a/designatedashboard/tests/test_designatedashboard.py b/designatedashboard/tests/test_designatedashboard.py
-index 86bcfd8..234a815 100644
---- a/designatedashboard/tests/test_designatedashboard.py
-+++ b/designatedashboard/tests/test_designatedashboard.py
-@@ -24,7 +24,7 @@ from django.core.urlresolvers import reverse  # noqa
+Index: designate-dashboard/designatedashboard/tests/test_designatedashboard.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/test_designatedashboard.py
++++ designate-dashboard/designatedashboard/tests/test_designatedashboard.py
+@@ -22,9 +22,7 @@ from __future__ import unicode_literals
+ from django.core.urlresolvers import reverse  # noqa
+ # from django import http
  
- from mox import IsA  # noqa
- 
+-from mox import IsA  # noqa
+-
 -from designatedashboard import tests
 +from designatedashboard.tests import base
  
  DOMAIN_ID = '123'
  # INDEX_URL = reverse('horizon:project:dns_domains:index')
-@@ -78,7 +78,7 @@ DOMAIN_ID = '123'
+@@ -78,7 +76,7 @@ DOMAIN_ID = '123'
  #         self.assertEqual(len(res.context['table'].data), len(records))
  
  
@@ -184,7 +186,7 @@ index 86bcfd8..234a815 100644
  
      IPV4 = '1.1.1.1'
  
-@@ -140,7 +140,7 @@ class ARecordFormTests(tests.BaseRecordFormCleanTests):
+@@ -140,7 +138,7 @@ class ARecordFormTests(tests.BaseRecordF
          self.assert_error('data', self.MSG_INVALID_IPV4)
  
  
@@ -193,7 +195,7 @@ index 86bcfd8..234a815 100644
  
      IPV6 = '1111:1111:1111:11::1'
  
-@@ -202,7 +202,7 @@ class AAAARecordFormTests(tests.BaseRecordFormCleanTests):
+@@ -202,7 +200,7 @@ class AAAARecordFormTests(tests.BaseReco
          self.assert_error('data', self.MSG_INVALID_IPV6)
  
  
@@ -202,7 +204,7 @@ index 86bcfd8..234a815 100644
  
      CNAME = 'bar.foo.com.'
  
-@@ -262,7 +262,7 @@ class CNAMERecordFormTests(tests.BaseRecordFormCleanTests):
+@@ -262,7 +260,7 @@ class CNAMERecordFormTests(tests.BaseRec
          self.assert_error('data', self.MSG_INVALID_HOSTNAME_SHORT)
  
  
@@ -211,7 +213,7 @@ index 86bcfd8..234a815 100644
  
      MAIL_SERVER = 'mail.foo.com.'
      PRIORITY = 10
-@@ -297,7 +297,7 @@ class MXRecordFormTests(tests.BaseRecordFormCleanTests):
+@@ -297,7 +295,7 @@ class MXRecordFormTests(tests.BaseRecord
          self.assertEqual(self.DOMAIN_NAME, self.form.cleaned_data['name'])
  
  
@@ -220,7 +222,7 @@ index 86bcfd8..234a815 100644
  
      TEXT = 'Lorem ipsum'
  
-@@ -356,7 +356,7 @@ class TXTRecordFormTests(tests.BaseRecordFormCleanTests):
+@@ -356,7 +354,7 @@ class TXTRecordFormTests(tests.BaseRecor
          self.assertEqual(self.TEXT, self.form.cleaned_data['data'])
  
  
@@ -229,10 +231,10 @@ index 86bcfd8..234a815 100644
  
      SRV_NAME = '_foo._tcp.'
      SRV_DATA = '1 1 srv.foo.com.'
-diff --git a/designatedashboard/tests/test_ptr_record_form.py b/designatedashboard/tests/test_ptr_record_form.py
-index 9bbb162..969fe44 100644
---- a/designatedashboard/tests/test_ptr_record_form.py
-+++ b/designatedashboard/tests/test_ptr_record_form.py
+Index: designate-dashboard/designatedashboard/tests/test_ptr_record_form.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/test_ptr_record_form.py
++++ designate-dashboard/designatedashboard/tests/test_ptr_record_form.py
 @@ -12,10 +12,10 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
@@ -246,10 +248,10 @@ index 9bbb162..969fe44 100644
  
      PTR = "6.0.0.10.in-addr.arpa."
  
-diff --git a/designatedashboard/tests/test_spf_record_form.py b/designatedashboard/tests/test_spf_record_form.py
-index ceb293f..7885c3f 100644
---- a/designatedashboard/tests/test_spf_record_form.py
-+++ b/designatedashboard/tests/test_spf_record_form.py
+Index: designate-dashboard/designatedashboard/tests/test_spf_record_form.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/test_spf_record_form.py
++++ designate-dashboard/designatedashboard/tests/test_spf_record_form.py
 @@ -12,10 +12,10 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
@@ -263,10 +265,10 @@ index ceb293f..7885c3f 100644
  
      TEXT = 'v=spf1 +all'
  
-diff --git a/designatedashboard/tests/test_sshfp_record_form.py b/designatedashboard/tests/test_sshfp_record_form.py
-index 53169fb..32d7799 100644
---- a/designatedashboard/tests/test_sshfp_record_form.py
-+++ b/designatedashboard/tests/test_sshfp_record_form.py
+Index: designate-dashboard/designatedashboard/tests/test_sshfp_record_form.py
+===================================================================
+--- designate-dashboard.orig/designatedashboard/tests/test_sshfp_record_form.py
++++ designate-dashboard/designatedashboard/tests/test_sshfp_record_form.py
 @@ -12,10 +12,10 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
