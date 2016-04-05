@@ -1,0 +1,9 @@
+Description: Install missing files
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2016-04-05
+
+--- /dev/null	2015-11-25 10:13:06.495404578 +0000
++++ b/MANIFEST.in	2016-04-05 21:17:54.814428864 +0000
+@@ -0,0 +1 @@
++recursive-include designatedashboard *
