@@ -1,4 +1,4 @@
-designate-dashboard (2.0.0~rc1-1) experimental; urgency=medium
+designate-dashboard (2.0.0~rc2-1) unstable; urgency=medium
 
   * Initial release. (Closes: #812600)
 
