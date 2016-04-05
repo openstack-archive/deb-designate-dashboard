@@ -4,9 +4,10 @@ set -e
 
 if [ "$1" = "configure" ] ; then
 	# Compress the JS and CSS with python-compressor and python-lesscpy
-	OSLO_PACKAGE_VERSION=2.0.0.0rc2 /usr/share/openstack-dashboard/manage.py compress --force
-	rm /var/lib/openstack-dashboard/secret-key/.secret_key_store
-	chown -R www-data /var/lib/openstack-dashboard/secret-key
+	#OSLO_PACKAGE_VERSION=2.0.0.0rc2 /usr/share/openstack-dashboard/manage.py compress --force
+	#rm /var/lib/openstack-dashboard/secret-key/.secret_key_store
+	#chown -R www-data /var/lib/openstack-dashboard/secret-key
+	echo "No static, so not compress or collecstatic with designate"
 fi
 
 #DEBHELPER#
