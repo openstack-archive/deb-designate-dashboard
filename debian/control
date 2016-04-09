@@ -30,7 +30,7 @@ Build-Depends-Indep: openstack-dashboard (>= 9.0.0~rc1),
                      python-testtools (>= 1.4.0),
                      python-unittest2,
                      testrepository,
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 Homepage: https://github.com/stackforge/designate-dashboard
 Vcs-Git: https://anonscm.debian.org/git/openstack/designate-dashboard.git
 Vcs-Browser: https://anonscm.debian.org/cgit/openstack/designate-dashboard.git/
