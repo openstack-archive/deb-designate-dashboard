@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 9),
                python-pbr (>= 1.8),
                python-setuptools,
                python-sphinx,
-Build-Depends-Indep: openstack-dashboard (>= 9.0.0~rc1),
+Build-Depends-Indep: openstack-dashboard (>= 3:9.0.0~rc1),
                      python-babel,
                      python-coverage,
                      python-designateclient (>= 1.5.0),
@@ -37,7 +37,7 @@ Vcs-Browser: https://anonscm.debian.org/cgit/openstack/designate-dashboard.git/
 
 Package: python-designate-dashboard
 Architecture: all
-Depends: openstack-dashboard (>= 9.0.0~rc1),
+Depends: openstack-dashboard (>= 3:9.0.0~rc1),
          python-babel,
          python-designateclient (>= 1.5.0),
          python-pbr (>= 1.8),
