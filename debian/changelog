@@ -1,4 +1,4 @@
-designate-dashboard (2.0.0-3) UNRELEASED; urgency=medium
+designate-dashboard (2.0.0-2) unstable; urgency=medium
 
   [ Ondřej Nový ]
   * Standards-Version is 3.9.8 now (no change)
@@ -6,8 +6,9 @@ designate-dashboard (2.0.0-3) UNRELEASED; urgency=medium
 
   [ Thomas Goirand ]
   * Fixed missing EPOC for the horizon and oslo.config dependency.
+  * Adds fix-init-fails-to-get-version.patch (Closes: #832055).
 
- -- Thomas Goirand <zigo@debian.org>  Tue, 28 Jun 2016 08:21:57 +0000
+ -- Thomas Goirand <zigo@debian.org>  Wed, 27 Jul 2016 16:20:33 +0200
 
 designate-dashboard (2.0.0-1) unstable; urgency=medium
 

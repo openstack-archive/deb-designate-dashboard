@@ -1,0 +1,21 @@
+Description: Fix __init__.py fails to fetch version
+ For some reasons, using pbr.version.VersionInfo doesn't work. Using
+ pkg_resources instead works.
+Author: Thomas Goirand <zigo@debian.org>
+Bug-Debian: https://bugs.debian.org/832055
+Forwarded: not-needed
+Last-Update: 2016-07-27
+
+--- designate-dashboard-2.0.0.orig/designatedashboard/__init__.py
++++ designate-dashboard-2.0.0/designatedashboard/__init__.py
+@@ -12,8 +12,7 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-import pbr.version
++import pkg_resources
+ 
+ 
+-__version__ = pbr.version.VersionInfo(
+-    'designatedashboard').version_string()
++__version__ = pkg_resources.get_distribution("designate_dashboard").version

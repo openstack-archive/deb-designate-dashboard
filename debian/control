@@ -41,6 +41,7 @@ Depends: openstack-dashboard (>= 3:9.0.0~rc1),
          python-babel,
          python-designateclient (>= 1.5.0),
          python-pbr (>= 1.8),
+         python-pkg-resources,
          ${misc:Depends},
          ${python:Depends},
 Description: OpenStack DNS as a Service - dashboard plugin
