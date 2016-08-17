@@ -1,0 +1,10 @@
+Code-Review+1: KATO Tomoyuki <kato.tomoyuki@jp.fujitsu.com>
+Code-Review+2: Graham Hayes <graham.hayes@hpe.com>
+Code-Review+2: Kiall Mac Innes <kiall@macinnes.ie>
+Workflow+1: Kiall Mac Innes <kiall@macinnes.ie>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 25 Mar 2016 13:03:42 +0000
+Reviewed-on: https://review.openstack.org/296807
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/master
