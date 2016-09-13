@@ -1,0 +1,8 @@
+Code-Review+2: Kiall Mac Innes <kiall@macinnes.ie>
+Workflow+1: Kiall Mac Innes <kiall@macinnes.ie>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 23 May 2016 12:43:04 +0000
+Reviewed-on: https://review.openstack.org/319750
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/stable/mitaka
