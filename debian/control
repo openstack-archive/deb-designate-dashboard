@@ -32,8 +32,8 @@ Build-Depends-Indep: openstack-dashboard (>= 3:9.0.0~rc1),
                      testrepository,
 Standards-Version: 3.9.8
 Homepage: https://github.com/stackforge/designate-dashboard
-Vcs-Git: https://anonscm.debian.org/git/openstack/designate-dashboard.git
-Vcs-Browser: https://anonscm.debian.org/cgit/openstack/designate-dashboard.git/
+Vcs-Git: https://git.openstack.org/openstack/deb-designate-dashboard -b debian/newton
+Vcs-Browser: https://git.openstack.org/cgit/openstack/deb-designate-dashboard?h=debian%2Fnewton
 
 Package: python-designate-dashboard
 Architecture: all

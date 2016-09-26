@@ -1,3 +1,10 @@
+designate-dashboard (2.0.0-3) UNRELEASED; urgency=medium
+
+  * d/s/options: extend-diff-ignore of .gitreview
+  * d/control: Using OpenStack's Gerrit as VCS URLs.
+
+ -- Ondřej Nový <onovy@debian.org>  Mon, 26 Sep 2016 19:01:51 +0200
+
 designate-dashboard (2.0.0-2) unstable; urgency=medium
 
   [ Ondřej Nový ]
