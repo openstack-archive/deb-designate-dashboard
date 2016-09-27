@@ -1,3 +1,14 @@
+designate-dashboard (3.0.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Fixed (build-)depends for this release.
+  * Using OpenStack's Gerrit as VCS URLs.
+  * Point .gitreview file to OpenStack's Gerrit packaging-deb.
+  * d/s/options: ignore .gitreview changes.
+  * Disable fix-init-fails-to-get-version.patch.
+
+ -- Thomas Goirand <zigo@debian.org>  Wed, 28 Sep 2016 01:14:56 +0200
+
 designate-dashboard (2.0.0-2) unstable; urgency=medium
 
   [ Ondřej Nový ]

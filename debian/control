@@ -10,35 +10,35 @@ Build-Depends: debhelper (>= 9),
                python-pbr (>= 1.8),
                python-setuptools,
                python-sphinx,
-Build-Depends-Indep: openstack-dashboard (>= 3:9.0.0~rc1),
-                     python-babel,
+Build-Depends-Indep: openstack-dashboard (>= 3:10.0.0~rc1),
+                     python-babel (>= 2.3.4),
                      python-coverage,
                      python-designateclient (>= 1.5.0),
                      python-django (>= 1.8),
                      python-django-compressor (>= 2.0),
-                     python-django-nose,
-                     python-django-openstack-auth (>= 2.0.0),
-                     python-mock (>= 1.3),
+                     python-django-nose (>= 1.4.4),
+                     python-django-openstack-auth (>= 2.4.0),
+                     python-mock (>= 2.0),
                      python-mox,
                      python-mox3 (>= 0.7.0),
                      python-nose,
                      python-nosehtmloutput,
                      python-nosexcover,
                      python-openstack.nose-plugin,
-                     python-oslo.config (>= 1:3.7.0),
+                     python-oslo.config (>= 1:3.14.0),
                      python-oslosphinx (>= 2.5.0),
                      python-testtools (>= 1.4.0),
                      python-unittest2,
                      testrepository,
 Standards-Version: 3.9.8
+Vcs-Browser: https://git.openstack.org/cgit/openstack/deb-designate-dashboard?h=debian%2Fnewton
+Vcs-Git: https://git.openstack.org/openstack/deb-designate-dashboard.git -b debian/newton
 Homepage: https://github.com/stackforge/designate-dashboard
-Vcs-Git: https://anonscm.debian.org/git/openstack/designate-dashboard.git
-Vcs-Browser: https://anonscm.debian.org/cgit/openstack/designate-dashboard.git/
 
 Package: python-designate-dashboard
 Architecture: all
-Depends: openstack-dashboard (>= 3:9.0.0~rc1),
-         python-babel,
+Depends: openstack-dashboard (>= 3:10.0.0~rc1),
+         python-babel (>= 2.3.4),
          python-designateclient (>= 1.5.0),
          python-pbr (>= 1.8),
          python-pkg-resources,

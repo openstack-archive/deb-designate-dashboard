@@ -1,2 +1,2 @@
 install-missing-files.patch
-fix-init-fails-to-get-version.patch
+#fix-init-fails-to-get-version.patch
