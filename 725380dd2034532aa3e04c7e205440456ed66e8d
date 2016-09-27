@@ -1,0 +1,8 @@
+Code-Review+2: Kiall Mac Innes <kiall@macinnes.ie>
+Workflow+1: Kiall Mac Innes <kiall@macinnes.ie>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 27 Sep 2016 14:30:52 +0000
+Reviewed-on: https://review.openstack.org/377293
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/stable/newton
