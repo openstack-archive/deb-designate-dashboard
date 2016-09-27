@@ -1,5 +1,5 @@
 [gerrit]
 host=review.openstack.org
 port=29418
-project=openstack/designate-dashboard.git
-defaultbranch=stable/mitaka
+project=openstack/deb-designate-dashboard.git
+defaultbranch=debian/newton

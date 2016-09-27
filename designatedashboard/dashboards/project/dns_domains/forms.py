@@ -38,7 +38,7 @@ DOMAIN_NAME_REGEX = r'^(?!.{255,})(?:(?!\-)[A-Za-z0-9_\-]{1,63}(?<!\-)\.)+$'
 WILDCARD_DOMAIN_NAME_REGEX = r'^(?!.{255,})(?:(^\*|(?!\-)[A-Za-z0-9_\-]{1,63})(?<!\-)\.)+$'  # noqa
 SRV_NAME_REGEX = r'^(?:_[A-Za-z0-9_\-]{1,62}\.){2}'
 SRV_DATA_REGEX = r'^(?:(?:6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{1,3}|[0-9])\s){2}(?!.{255,})((?!\-)[A-Za-z0-9_\-]{1,63}(?<!\-)\.)+$'  # noqa
-SSHFP_DATA_REGEX = r'^[1-3]\s[1-2]\s\b([0-9a-fA-F]{5,40}|[0-9a-fA-F]{64})\b$'
+SSHFP_DATA_REGEX = r'^[1-4]\s[1-2]\s\b([0-9a-fA-F]{5,40}|[0-9a-fA-F]{64})\b$'
 # The max length for a dns label
 NAME_MAX_LENGTH = 63
 
@@ -395,9 +395,9 @@ class RecordForm(forms.SelfHandlingForm):
 
         #  Name field
         if self._is_field_blank(cleaned_data, 'name'):
-            if record_type in ['A', 'AAAA', 'CNAME', 'SRV', 'TXT', 'PTR']:
+            if record_type in ['CNAME', 'SRV']:
                 self._add_required_field_error('name')
-            elif record_type == 'MX':
+            elif record_type in ['MX', 'A', 'AAAA', 'TXT', 'PTR']:
                 cleaned_data['name'] = domain_name
         else:
             if record_type == 'SRV':
@@ -459,7 +459,11 @@ class RecordForm(forms.SelfHandlingForm):
         cleaned_data.pop('txt')
 
         # Priority field
-        if self._is_field_blank(cleaned_data, 'priority'):
+        # Check against '' instead of using _is_field_blank because we need to
+        # allow a valud of 0.
+        if ('priority' not in cleaned_data or
+                cleaned_data['priority'] == '' or
+                cleaned_data['priority'] is None):
             if record_type in ['MX', 'SRV']:
                 self._add_required_field_error('priority')
 
