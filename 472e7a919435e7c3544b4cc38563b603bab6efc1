@@ -1,0 +1,9 @@
+Code-Review+2: Kiall Mac Innes <kiall@macinnes.ie>
+Workflow+1: Eric Larson <eric.larson@rackspace.com>
+Code-Review+2: Eric Larson <eric.larson@rackspace.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 28 Sep 2016 18:36:53 +0000
+Reviewed-on: https://review.openstack.org/378621
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/stable/newton
