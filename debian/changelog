@@ -1,6 +1,6 @@
 designate-dashboard (3.0.0~rc1-2) unstable; urgency=medium
 
-  * Uploading to unstable.
+  * Uploading to unstable (Closes: #837255).
 
  -- Thomas Goirand <zigo@debian.org>  Tue, 04 Oct 2016 09:36:35 +0200
 
