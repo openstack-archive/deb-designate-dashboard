@@ -1,3 +1,9 @@
+designate-dashboard (3.0.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 07 Oct 2016 02:09:27 +0200
+
 designate-dashboard (3.0.0~rc1-2) unstable; urgency=medium
 
   * Uploading to unstable (Closes: #837255).
