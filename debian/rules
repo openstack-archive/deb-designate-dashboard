@@ -37,9 +37,6 @@ override_dh_auto_install:
 	mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
 	cp $(CURDIR)/designatedashboard/enabled/_17*.py $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
 
-	set -e ; set -x ; for i in api dashboards ; do \
-		cp -auxf designatedashboard/$$i $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard ; \
-	done
 	rm $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/api/__init__.py
 	rm $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/dashboards/__init__.py
 	rm $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/dashboards/project/__init__.py
