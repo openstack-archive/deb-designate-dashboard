@@ -29,10 +29,14 @@ override_dh_auto_install:
 	dh_auto_install -O--buildsystem=python_distutils
 
 	# Activates the designatedashboard plugin in Horizon
-	# designatedashboard/enabled/_7*
-	set -e ; for pyvers in $(PYTHONS); do \
-		mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
-		cp $(CURDIR)/designatedashboard/enabled/_17* $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
-	done
+	# designatedashboard/enabled/_17*
+	mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/lib/python$$pyvers/dist-packages/openstack_dashboard/enabled ; \
 	mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
-	cp $(CURDIR)/designatedashboard/enabled/_17*.py $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled
+	set -e ; for i in _1710_project_dns_panel_group.py _1721_dns_zones_panel.py _1722_dns_reversedns_panel.py ; do \
+		cp $(CURDIR)/designatedashboard/enabled/$$i $(CURDIR)/debian/python-designate-dashboard/usr/lib/python2.7/dist-packages/openstack_dashboard/enabled ; \
+		cp $(CURDIR)/designatedashboard/enabled/$$i $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/enabled ; \
+	done
+
+	# Copy static files
+	mkdir -p $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/static
+	cp -auxf designatedashboard/static/designatedashboard $(CURDIR)/debian/python-designate-dashboard/usr/share/openstack-dashboard/openstack_dashboard/static
