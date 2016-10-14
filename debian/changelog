@@ -1,3 +1,11 @@
+designate-dashboard (3.0.0-3) unstable; urgency=medium
+
+  * Correctly copy static files in /usr/share/openstack-dashboard, and run
+    collect-static and compress after its done.
+  * Do not install duplicate enabled file (Closes: #840638).
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 14 Oct 2016 23:34:04 +0200
+
 designate-dashboard (3.0.0-2) unstable; urgency=medium
 
   * Do not copy stuff in /usr/share/openstack-dashboard (Closes: #839908).
