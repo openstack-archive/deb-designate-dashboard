@@ -1,0 +1,8 @@
+Code-Review+2: Graham Hayes <graham.hayes@hpe.com>
+Workflow+1: Graham Hayes <graham.hayes@hpe.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 16 Jan 2017 14:17:19 +0000
+Reviewed-on: https://review.openstack.org/418227
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/master
