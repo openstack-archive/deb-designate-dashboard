@@ -1,0 +1,9 @@
+Code-Review+2: Graham Hayes <ghayes@suse.de>
+Code-Review+2: Tim Simmons <tim.r.simmons@gmail.com>
+Workflow+1: Tim Simmons <tim.r.simmons@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 08 May 2017 18:55:32 +0000
+Reviewed-on: https://review.openstack.org/457065
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/master
