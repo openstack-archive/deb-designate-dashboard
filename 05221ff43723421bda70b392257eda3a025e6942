@@ -1,0 +1,10 @@
+Code-Review+2: Graham Hayes <ghayes@suse.de>
+Code-Review+2: Akihiro Motoki <amotoki@gmail.com>
+Workflow+1: Akihiro Motoki <amotoki@gmail.com>
+Code-Review+1: Nguyen Van Trung <trungnv@vn.fujitsu.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 08 Jul 2017 07:38:04 +0000
+Reviewed-on: https://review.openstack.org/478654
+Project: openstack/deb-designate-dashboard
+Branch: refs/heads/master
